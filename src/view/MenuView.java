@@ -19,11 +19,12 @@ import javax.swing.SwingConstants;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.plaf.basic.BasicComboBoxRenderer;
-import javax.xml.transform.OutputKeys;
 
+import model.Bus;
 import model.Car;
 import model.Observer;
 import model.Subject;
+import model.Truck;
 import control.ParkingController;
 
 public class MenuView extends JPanel implements Observer {
@@ -63,13 +64,14 @@ public class MenuView extends JPanel implements Observer {
 		this.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 	}
 
-	private JComboBox vehicleTypeComboBox() {		
+	private JComboBox vehicleTypeComboBox() {
 		Vector model = new Vector();
 		model.addElement(new ComboBoxItem("Carro", Car.class));
+		model.addElement(new ComboBoxItem("Caminhão", Truck.class));
+		model.addElement(new ComboBoxItem("Ônibus", Bus.class));
 
 		vehicleTypeComboBox = new JComboBox(model);
 		vehicleTypeComboBox.setRenderer(new ItemRenderer());
-
 
 		return vehicleTypeComboBox;
 	}
@@ -103,9 +105,11 @@ public class MenuView extends JPanel implements Observer {
 	class StartParkingListener implements ActionListener, DocumentListener {
 		public void actionPerformed(ActionEvent e) {
 			String vehiclePlate = vehiclePlateField.getText();
-			Class vehicleType = ((ComboBoxItem) vehicleTypeComboBox.getSelectedItem()).getVehicle();
+			Class vehicleType = ((ComboBoxItem) vehicleTypeComboBox
+					.getSelectedItem()).getVehicle();
 
-			ParkingController.getInstance().addVehicle(vehiclePlate, vehicleType);
+			ParkingController.getInstance().addVehicle(vehiclePlate,
+					vehicleType);
 		}
 
 		@Override
@@ -131,8 +135,9 @@ public class MenuView extends JPanel implements Observer {
 		public void actionPerformed(ActionEvent e) {
 			double value = ParkingController.getInstance()
 					.finishSelectedParking(selectedPlate);
-			
-			JOptionPane.showMessageDialog(null, "Encerrar estacionamento: " + value);
+
+			JOptionPane.showMessageDialog(null, "Encerrar estacionamento: "
+					+ value);
 		}
 	}
 

@@ -2,14 +2,14 @@ package model;
 
 import control.PropertiesHandler;
 
-public class Car extends Vehicle {
-	public Car(String p) {
+public class Bus extends Vehicle {
+	public Bus(String p) {
 		super(p);
 		this.setPricebyHour(Integer.parseInt(PropertiesHandler
-				.getProperty("price.car.hour")));
+				.getProperty("price.bus.hour")));
 		this.setPricebyDay(Integer.parseInt(PropertiesHandler
-				.getProperty("price.car.day")));
+				.getProperty("price.bus.day")));
 		this.setPricebyMonth(Integer.parseInt(PropertiesHandler
-				.getProperty("price.car.month")));
+				.getProperty("price.bus.month")));
 	}
 }

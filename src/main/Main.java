@@ -8,10 +8,10 @@ public class Main {
 	public static void main(String[] args) {
 
 		javax.swing.SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                MainView.createAndShowGUI();
-            }
-        });
+			public void run() {
+				MainView.createAndShowGUI();
+			}
+		});
 
 		Parking p = Parking.getInstance();
 		p.add(new Car("abc123"));

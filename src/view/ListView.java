@@ -3,7 +3,6 @@ package view;
 import java.awt.BorderLayout;
 import java.util.ArrayList;
 import java.util.Observable;
-import java.util.Observer;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
@@ -13,6 +12,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import model.Observer;
 import model.Subject;
 import control.ParkingController;
 
@@ -33,7 +33,7 @@ public class ListView extends JPanel implements Subject, Observer,
 		this.add(initList());
 
 		// observer
-		ParkingController.getInstance().addObserver(this);
+		ParkingController.getInstance().registerObserver((model.Observer) this);
 	}
 
 	private JScrollPane initList() {
@@ -42,7 +42,7 @@ public class ListView extends JPanel implements Subject, Observer,
 
 		list = new JList(listModel);
 		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-//		list.setSelectedIndex(0);
+		// list.setSelectedIndex(0);
 		list.setVisibleRowCount(10);
 		list.addListSelectionListener(this);
 
@@ -54,11 +54,6 @@ public class ListView extends JPanel implements Subject, Observer,
 		for (String plate : ParkingController.getInstance().getCars()) {
 			listModel.addElement(plate);
 		}
-	}
-
-	@Override
-	public void update(Observable o, Object arg) {
-		loadListData();
 	}
 
 	@Override
@@ -88,5 +83,10 @@ public class ListView extends JPanel implements Subject, Observer,
 	public void valueChanged(ListSelectionEvent e) {
 		if (list.getSelectedValue() != null)
 			notifyObservers(list.getSelectedValue().toString());
+	}
+
+	@Override
+	public void update(String arg) {
+		loadListData();
 	}
 }

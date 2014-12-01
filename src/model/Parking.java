@@ -7,8 +7,9 @@ public class Parking {
 	private HashMap<String, Bill> parkedCars = new HashMap<String, Bill>();
 	private static Parking instance = new Parking();
 
-	private Parking(){}
-	
+	private Parking() {
+	}
+
 	public void add(Vehicle v) {
 		parkedCars.put(v.getPlate(), new Bill(v));
 	}
@@ -18,12 +19,12 @@ public class Parking {
 		parkedCars.remove(plate);
 		return b.checkout();
 	}
-	
-	public Set<String> getPlatesList(){
+
+	public Set<String> getPlatesList() {
 		return parkedCars.keySet();
 	}
-	
-	public static Parking getInstance(){
+
+	public static Parking getInstance() {
 		return instance;
 	}
 }

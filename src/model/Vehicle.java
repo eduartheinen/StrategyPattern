@@ -13,8 +13,8 @@ public abstract class Vehicle {
 	public String getPlate() {
 		return plate;
 	}
-	
-	public float getPricebyHour(){
+
+	public float getPricebyHour() {
 		return pricebyHour;
 	}
 
